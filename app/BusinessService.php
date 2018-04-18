@@ -170,13 +170,19 @@ class BusinessService {
     {
         $outputs = $params;
         foreach ($formats as $key => $newKey) {
+            //remove old key
+            unset($outputs[$key]);
+
             if (isset($params[$key])) {
-                $outputs[$newKey] = $params[$key];
+                //add value to output
+                $this->setArrayValue($outputs, $newKey, $params[$key]);
                 continue;
             }
 
+            //get value
             $resVal = $this->getValueFormObj(explode('.', $key), $this->responses);
-            $outputs[$newKey] = $resVal;
+            //add value to output
+            $this->setArrayValue($outputs, $newKey, $resVal);
         }
 
         return $outputs;
