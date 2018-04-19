@@ -165,6 +165,17 @@ class BusinessService {
         $this->responses[$service] = $respose;
     }
 
+    //Method for set value in Deep array
+    public function setArrayValue(&$array, $keys, $value, $delimeter=".") 
+    {
+        $keys    = explode($delimeter, $keys);
+        $current = &$array;
+        foreach($keys as $key) {
+            $current = &$current[$key];
+        }
+        $current = $value;
+    }
+
     //method for format param
     protected function formatParams($params, $formats)
     {
